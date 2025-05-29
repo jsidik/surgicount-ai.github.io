@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - SurgiCount AI</title>
+    <meta name="description" content="SurgiCount AI Privacy Policy - Learn how we collect, use, and protect your data in our surgical instrument tracking application.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-blue: #05668D;
+            --secondary-teal: #00A896;
+            --accent-green: #02C39A;
+            --light-blue: #028090;
+            --background-light: #F8FFFE;
+            --background-gray: #F0F3F5;
+            --text-dark: #1A2332;
+            --text-medium: #4A5568;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--background-gray);
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--secondary-teal) 0%, var(--accent-green) 50%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 80px 40px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .content {
+            padding: 80px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .last-updated {
+            background: linear-gradient(135deg, #E3F2FD, #F1F8E9);
+            border: 2px solid var(--accent-green);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .last-updated h3 {
+            color: var(--light-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .last-updated p {
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        
+        .section {
+            margin-bottom: 48px;
+        }
+        
+        .section h2 {
+            color: var(--light-blue);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+        
+        .section h3 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+        }
+        
+        .section p {
+            margin-bottom: 16px;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+        
+        .section ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+            border: 2px solid #FFB74D;
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #E65100;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box p {
+            color: #BF360C;
+            font-weight: 500;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
+            border: 2px solid #81C784;
+            border-radius: var(--border-radius);
+            padding: 32px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .contact-section h3 {
+            color: #2E7D32;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+        }
+        
+        .contact-section p {
+            color: #1B5E20;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .contact-email {
+            color: var(--secondary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 8px;
+        }
+        
+        .contact-email:hover {
+            background: rgba(0, 168, 150, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 24px 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 60px 24px;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .last-updated, .highlight-box, .contact-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Privacy Policy</h1>
+                <p>SurgiCount AI - Protecting your privacy in surgical instrument tracking</p>
+                <a href="../index.html" class="back-link">
+                    ← Back to SurgiCount AI
+                </a>
+            </div>
+        </div>
+        
+        <!-- Content Section -->
+        <div class="content">
+            <div class="last-updated">
+                <h3>Last Updated</h3>
+                <p>May 9, 2025</p>
+            </div>
+            
+            <div class="section">
+                <p>
+                    This privacy policy applies to the SurgiCount AI app (hereby referred to as "Application") for mobile devices that was created by Julian Sidik (hereby referred to as "Service Provider") as a Free service. This service is intended for use "AS IS".
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Information Collection and Use</h2>
+                <p>
+                    The Application collects information when you download and use it. This information may include information such as:
+                </p>
+                <ul>
+                    <li>Your device's Internet Protocol address (e.g. IP address)</li>
+                    <li>The pages of the Application that you visit, the time and date of your visit, the time spent on those pages</li>
+                    <li>The time spent on the Application</li>
+                    <li>The operating system you use on your mobile device</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h4>Location Information</h4>
+                    <p>The Application does not gather precise information about the location of your mobile device.</p>
+                </div>
+                
+                <p>
+                    The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.
+                </p>
+                
+                <p>
+                    For a better experience, while using the Application, the Service Provider may require you to provide us with certain personally identifiable information, including but not limited to email, password. The information that the Service Provider request will be retained by them and used as described in this privacy policy.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Third Party Access</h2>
+                <p>
+                    Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+                </p>
+                
+                <p>
+                    Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
+                </p>
+                
+                <ul>
+                    <li><a href="https://policies.google.com/privacy" target="_blank" style="color: var(--secondary-teal); font-weight: 500;">Google Play Services</a></li>
+                </ul>
+                
+                <h3>Information Disclosure</h3>
+                <p>The Service Provider may disclose User Provided and Automatically Collected Information:</p>
+                <ul>
+                    <li>as required by law, such as to comply with a subpoena, or similar legal process;</li>
+                    <li>when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;</li>
+                    <li>with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Opt-Out Rights</h2>
+                <p>
+                    You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Data Retention Policy</h2>
+                <p>
+                    The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at <a href="mailto:jsidik@ucdavis.edu" class="contact-email">jsidik@ucdavis.edu</a> and they will respond in a reasonable time.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Children's Privacy</h2>
+                <p>
+                    The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.
+                </p>
+                
+                <p>
+                    The Application does not address anyone under the age of 13. The Service Provider does not knowingly collect personally identifiable information from children under 13 years of age. In the case the Service Provider discover that a child under 13 has provided personal information, the Service Provider will immediately delete this from their servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact the Service Provider at <a href="mailto:jsidik@ucdavis.edu" class="contact-email">jsidik@ucdavis.edu</a> so that they will be able to take the necessary actions.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Security</h2>
+                <p>
+                    The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Changes to This Privacy Policy</h2>
+                <p>
+                    This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2>Your Consent</h2>
+                <p>
+                    By using the Application, you are consenting to the processing of your information as set forth in this Privacy Policy now and as amended by us.
+                </p>
+            </div>
+            
+            <div class="contact-section">
+                <h3>Contact Us</h3>
+                <p>
+                    If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider:
+                </p>
+                <a href="mailto:jsidik@ucdavis.edu" class="contact-email">jsidik@ucdavis.edu</a>
+            </div>
+            
+            <div class="section">
+                <p style="font-size: 0.9rem; color: var(--text-medium); font-style: italic; text-align: center;">
+                    This privacy policy page was generated by App Privacy Policy Generator
+                </p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 SurgiCount AI by Julian Sidik. All rights reserved.</p>
+            <p>
+                <a href="../index.html">Back to Main Site</a> | 
+                <a href="mailto:jsidik@ucdavis.edu">Contact Support</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html> 
