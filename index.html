@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurgiCount AI - Surgical Instrument Tracking & Counting</title>
+    <meta name="description" content="SurgiCount AI: AI-powered surgical instrument counting and tracking system for enhanced patient safety and surgical efficiency.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-blue: #05668D;
+            --secondary-teal: #00A896;
+            --accent-green: #02C39A;
+            --light-blue: #028090;
+            --background-light: #F8FFFE;
+            --background-gray: #F0F3F5;
+            --text-dark: #1A2332;
+            --text-medium: #4A5568;
+            --white: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--background-gray);
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-teal) 0%, var(--accent-green) 50%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 100px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 48px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .app-store-btn {
+            display: inline-block;
+            transition: var(--transition);
+            filter: drop-shadow(var(--shadow-md));
+        }
+        
+        .app-store-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            filter: drop-shadow(var(--shadow-lg));
+        }
+        
+        .app-store-btn img {
+            height: 64px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .features {
+            padding: 120px 40px;
+            background: var(--white);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--light-blue);
+            letter-spacing: -0.02em;
+        }
+        
+        .features-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 48px 32px;
+            border-radius: var(--border-radius);
+            background: var(--background-light);
+            border: 1px solid rgba(0, 168, 150, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-teal), var(--accent-green));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 168, 150, 0.2);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        
+        .feature-card h3 {
+            color: var(--light-blue);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-card p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        .about {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, var(--background-gray) 0%, var(--background-light) 100%);
+        }
+        
+        .about h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--light-blue);
+            letter-spacing: -0.02em;
+        }
+        
+        .about-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-medium);
+        }
+        
+        .about-content p {
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+        
+        .section {
+            padding: 120px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            color: var(--light-blue);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section p, .section li {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+        
+        .section ul {
+            padding-left: 24px;
+        }
+        
+        .section h3 {
+            color: var(--light-blue);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+        }
+        
+        .steps {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            border-left: 6px solid var(--secondary-teal);
+            margin: 32px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 168, 150, 0.1);
+        }
+        
+        .steps h3 {
+            color: var(--light-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .steps ol {
+            padding-left: 24px;
+        }
+        
+        .steps li {
+            margin-bottom: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+            border: 2px solid #FFB74D;
+            border-radius: var(--border-radius);
+            padding: 32px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .warning h3 {
+            color: #E65100;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .warning p, .warning li {
+            color: #BF360C;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
+            border: 2px solid #81C784;
+            border-radius: var(--border-radius);
+            padding: 32px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .contact-info h3 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .contact-info p {
+            color: #1B5E20;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 60px 40px 40px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-green);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .footer-info {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 24px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .footer-info p {
+            margin-bottom: 8px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--background-gray);
+            z-index: 1000;
+        }
+        
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-teal), var(--accent-green));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 24px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .features, .about, .section {
+                padding: 80px 24px;
+            }
+            
+            .features h2, .about h2, .section h2 {
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .feature-card {
+                padding: 40px 24px;
+            }
+            
+            .nav-links {
+                gap: 12px;
+            }
+            
+            .nav-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .download-buttons {
+                gap: 20px;
+            }
+            
+            .app-store-btn img {
+                height: 56px;
+            }
+            
+            .footer-links {
+                gap: 24px;
+                flex-direction: column;
+            }
+            
+            .steps, .warning, .contact-info {
+                padding: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .features h2, .about h2, .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>SurgiCount AI</h1>
+                <p>AI-powered surgical instrument counting and tracking system for enhanced patient safety and surgical efficiency</p>
+                
+                <div class="download-buttons">
+                    <a href="#" class="app-store-btn" id="app-store-link">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+                    </a>
+                    <a href="#" class="app-store-btn" id="play-store-link">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+                    </a>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#account-deletion" class="nav-link">Account Deletion</a>
+                    <a href="https://doc-hosting.flycricket.io/surgicount-ai-privacy-policy/07a83d99-7ed0-4d83-bfcb-0b301a063090/privacy" class="nav-link" target="_blank">Privacy Policy</a>
+                    <a href="https://doc-hosting.flycricket.io/surgicount-ai-terms-of-use/10bfe509-7ea0-4cd2-8589-330c592d45e1/terms" class="nav-link" target="_blank">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="features" id="features">
+            <h2>Key Features</h2>
+            <p class="features-subtitle">Advanced technology designed to enhance surgical safety and efficiency in operating rooms worldwide.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Advanced computer vision technology automatically identifies and counts surgical instruments with high accuracy, reducing human error and improving patient safety.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Tracking</h3>
+                    <p>Monitor instrument counts before, during, and after surgical procedures with instant updates and comprehensive session management.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Compliant</h3>
+                    <p>HIPAA-compliant data handling with secure cloud storage, multi-factor authentication, and comprehensive audit trails.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Streamlined Workflow</h3>
+                    <p>Intuitive interface designed for operating room environments with quick capture, automatic counting, and seamless integration into existing surgical protocols.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Section -->
+        <div class="about" id="about">
+            <h2>About SurgiCount AI</h2>
+            <p class="about-subtitle">Revolutionizing surgical instrument management through cutting-edge artificial intelligence.</p>
+            <div class="about-content">
+                <p>
+                    SurgiCount AI revolutionizes surgical instrument management through cutting-edge artificial intelligence. 
+                    Our platform helps surgical teams maintain accurate instrument counts, reducing the risk of retained 
+                    surgical items and improving overall patient safety outcomes.
+                </p>
+                
+                <p>
+                    Built with React Native and powered by advanced machine learning models, SurgiCount AI provides 
+                    healthcare professionals with the tools they need to ensure accurate instrument tracking throughout 
+                    surgical procedures.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Account Deletion Section -->
+        <div class="section" id="account-deletion">
+            <h2>Account Deletion Request</h2>
+            <p class="section-subtitle">
+                If you wish to delete your SurgiCount AI account and all associated data, 
+                please follow the steps below. This process ensures your privacy rights are 
+                respected and your data is permanently removed from our systems.
+            </p>
+            
+            <div class="steps">
+                <h3>Option 1: In-App Deletion (Recommended)</h3>
+                <ol>
+                    <li>Open the SurgiCount AI app on your device</li>
+                    <li>Log in to your account</li>
+                    <li>Navigate to <strong>Settings</strong> from the main menu</li>
+                    <li>Scroll down to the <strong>"Danger Zone"</strong> section</li>
+                    <li>Tap <strong>"Delete Account"</strong></li>
+                    <li>Follow the confirmation prompts to permanently delete your account</li>
+                </ol>
+                
+                <h3 style="margin-top: 20px;">Option 2: Email Request</h3>
+                <ol>
+                    <li>Send an email from your registered email address</li>
+                    <li>Include your account email and reason for deletion</li>
+                    <li>We will process your request within 7 business days</li>
+                    <li>You will receive a confirmation email once deletion is complete</li>
+                </ol>
+            </div>
+            
+            <div class="warning">
+                <h3>⚠️ Important Notice</h3>
+                <p><strong>Account deletion is permanent and cannot be undone.</strong></p>
+                <p>Once you delete your account, you will lose access to:</p>
+                <ul>
+                    <li>All surgical instrument counting sessions</li>
+                    <li>Historical analysis data</li>
+                    <li>Account settings and preferences</li>
+                    <li>Any associated images or files</li>
+                </ul>
+            </div>
+            
+            <h3>Data Types Deleted</h3>
+            <p>When you delete your account, the following data will be <strong>permanently removed</strong>:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Email address, name, authentication data</li>
+                <li><strong>Session Data:</strong> All surgical counting sessions and their results</li>
+                <li><strong>Images:</strong> Any uploaded surgical instrument photos</li>
+                <li><strong>Analysis Results:</strong> AI-generated counting and analysis data</li>
+                <li><strong>User Preferences:</strong> App settings and customizations</li>
+                <li><strong>Usage Analytics:</strong> App usage patterns and statistics</li>
+            </ul>
+            
+            <h3>Data Retention Policy</h3>
+            <p><strong>Immediate Deletion (0 days retention):</strong></p>
+            <ul>
+                <li>Personal account information</li>
+                <li>User-uploaded images</li>
+                <li>Session data and analysis results</li>
+            </ul>
+            
+            <p><strong>30-day retention period:</strong></p>
+            <ul>
+                <li>System logs (anonymized after 30 days)</li>
+                <li>Backup data (permanently purged after 30 days)</li>
+            </ul>
+            
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>For account deletion requests or questions:</strong></p>
+                <p>📧 Email: jsidik@ucdavis.edu</p>
+                <p>⏰ Response time: Within 7 business days</p>
+                <p>🌐 App Support: Available through the in-app settings</p>
+            </div>
+            
+            <h3>Your Privacy Rights</h3>
+            <p>
+                You have the right to request deletion of your personal data under various 
+                privacy laws including GDPR, CCPA, and others. SurgiCount AI is committed 
+                to respecting your privacy and will process all deletion requests promptly.
+            </p>
+            <p>
+                If you have questions about this process or need assistance, 
+                please contact us using the information provided above.
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                    <a href="#account-deletion">Account Deletion</a>
+                    <a href="https://doc-hosting.flycricket.io/surgicount-ai-privacy-policy/07a83d99-7ed0-4d83-bfcb-0b301a063090/privacy" target="_blank">Privacy Policy</a>
+                    <a href="https://doc-hosting.flycricket.io/surgicount-ai-terms-of-use/10bfe509-7ea0-4cd2-8589-330c592d45e1/terms" target="_blank">Terms of Use</a>
+                </div>
+                <div class="footer-info">
+                    <p>&copy; 2024 SurgiCount AI by J.K. Sidik. All rights reserved.</p>
+                    <p>This page complies with Google Play Store homepage and account deletion requirements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scroll-progress');
+            const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / scrollableHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+        
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe feature cards and sections
+        document.querySelectorAll('.feature-card, .section, .about-content').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Placeholder for actual app store URLs - update these when your app is published
+        document.getElementById('app-store-link').href = 'https://apps.apple.com/app/surgicount-ai/id123456789'; // Replace with actual App Store URL
+        document.getElementById('play-store-link').href = 'https://play.google.com/store/apps/details?id=com.jsidik.frontEnd'; // Replace with actual Play Store URL
+    </script>
+</body>
+</html> 
