@@ -115,7 +115,8 @@
         
         .app-store-btn img {
             height: 64px;
-            width: auto;
+            width: 200px;
+            object-fit: contain;
         }
         
         .nav-links {
@@ -552,10 +553,10 @@
                 <p>AI-powered surgical instrument counting and tracking system for enhanced patient safety and surgical efficiency</p>
                 
                 <div class="download-buttons">
-                    <a href="#" class="app-store-btn" id="app-store-link">
+                    <a href="https://apps.apple.com/us/app/surgicount-ai/id6745680919" class="app-store-btn" target="_blank" rel="noopener noreferrer">
                         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
                     </a>
-                    <a href="#" class="app-store-btn" id="play-store-link">
+                    <a href="https://play.google.com/store/apps/details?id=com.jsidik.frontEnd" class="app-store-btn" target="_blank" rel="noopener noreferrer">
                         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
                     </a>
                 </div>
@@ -761,10 +762,6 @@
         document.querySelectorAll('.feature-card, .section, .about-content').forEach(el => {
             observer.observe(el);
         });
-        
-        // Placeholder for actual app store URLs - update these when your app is published
-        document.getElementById('app-store-link').href = 'https://apps.apple.com/us/app/surgicount-ai/id6745680919'; // Apple App Store URL
-        document.getElementById('play-store-link').href = 'https://play.google.com/store/apps/details?id=com.jsidik.frontEnd'; // Google Play Store URL
     </script>
 </body>
 </html> 
